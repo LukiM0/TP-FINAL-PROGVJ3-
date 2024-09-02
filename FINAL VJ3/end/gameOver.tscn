@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://c08v4bf7hg7se"]
+
+[ext_resource type="Texture2D" uid="uid://dts0rng8xi4bs" path="res://Textures/Player/gameOver.png" id="1_aem1h"]
+[ext_resource type="Script" path="res://end/goToMenuLose.gd" id="1_aep52"]
+[ext_resource type="FontFile" uid="uid://dbhnr751vc1e1" path="res://Textures/Objects/Daydream.ttf" id="2_8gkyv"]
+[ext_resource type="PackedScene" uid="uid://rtju1vsyhrtf" path="res://Utility/basic_button.tscn" id="3_etsff"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_aep52")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(959.333, 537.5)
+scale = Vector2(1.49583, 1.49583)
+texture = ExtResource("1_aem1h")
+
+[node name="DeathPanel" type="Panel" parent="."]
+process_mode = 2
+visible = false
+offset_left = 30.0
+offset_top = 21.0
+offset_right = 550.0
+offset_bottom = 206.0
+
+[node name="snd_lose" type="AudioStreamPlayer" parent="DeathPanel"]
+unique_name_in_owner = true
+
+[node name="snd_victory" type="AudioStreamPlayer" parent="DeathPanel"]
+unique_name_in_owner = true
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 32.0
+offset_top = 21.0
+offset_right = 547.0
+offset_bottom = 206.0
+
+[node name="btn_menu" parent="Panel" instance=ExtResource("3_etsff")]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 114.0
+offset_right = 336.0
+offset_bottom = 149.0
+text = "menu
+"
+script = null
+
+[node name="lbl_Result" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -2.0
+offset_right = 518.0
+offset_bottom = 118.0
+theme_override_fonts/font = ExtResource("2_8gkyv")
+text = "Perdiste..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Panel/btn_menu" to="." method="_on_btn_menu_pressed"]

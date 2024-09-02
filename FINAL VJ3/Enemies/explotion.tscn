@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnuun1oj7nx17"]
+
+[ext_resource type="Texture2D" uid="uid://coflbc2xrqaos" path="res://Textures/Enemies/Explotion-Sheet.png" id="1_vplsh"]
+[ext_resource type="AudioStream" uid="uid://bdq4a5n0aad5u" path="res://Audio/SoundEffect/Enemies/Critter_death.wav" id="2_6bhw7"]
+[ext_resource type="Script" path="res://Enemies/explotion.gd" id="2_hwjv5"]
+
+[sub_resource type="Animation" id="Animation_cuka2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fws16"]
+resource_name = "explotion"
+length = 0.32
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 0.26, 0.28, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lssk3"]
+_data = {
+"RESET": SubResource("Animation_cuka2"),
+"explotion": SubResource("Animation_fws16")
+}
+
+[node name="Explotion" type="Sprite2D"]
+z_index = 1
+texture = ExtResource("1_vplsh")
+hframes = 4
+vframes = 4
+script = ExtResource("2_hwjv5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lssk3")
+}
+
+[node name="snd_explotion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_6bhw7")
+volume_db = -10.0
+pitch_scale = 0.5
+autoplay = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

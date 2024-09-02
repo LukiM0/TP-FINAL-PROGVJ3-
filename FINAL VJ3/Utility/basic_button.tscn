@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://rtju1vsyhrtf"]
+
+[ext_resource type="Script" path="res://Utility/basic_button.gd" id="1_gh563"]
+[ext_resource type="FontFile" uid="uid://dbhnr751vc1e1" path="res://Textures/Objects/Daydream.ttf" id="1_j00o2"]
+[ext_resource type="AudioStream" uid="uid://do5m0bcc21mt0" path="res://Audio/SoundEffect/Utilities/click.mp3" id="3_dpr42"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(80, 30)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("1_j00o2")
+theme_override_font_sizes/font_size = 20
+text = "Example"
+script = ExtResource("1_gh563")
+
+[node name="snd_hover" type="AudioStreamPlayer" parent="."]
+
+[node name="snd_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dpr42")
+volume_db = -5.0
+pitch_scale = 4.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="finished" from="snd_click" to="." method="_on_snd_click_finished"]

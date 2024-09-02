@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://emeg12jycojo"]
+
+[ext_resource type="FontFile" uid="uid://dbhnr751vc1e1" path="res://Textures/Objects/Daydream.ttf" id="1_0in2o"]
+[ext_resource type="Script" path="res://Utility/pause_menu.gd" id="1_ahc0w"]
+[ext_resource type="PackedScene" uid="uid://by02ijqyoegwm" path="res://Utility/volume_slider.tscn" id="3_sxwts"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ahc0w")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.5
+offset_top = -49.0
+offset_right = 110.5
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="resume" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0in2o")
+text = "Resumir"
+
+[node name="menu" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0in2o")
+text = "Menu Principal"
+
+[node name="quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0in2o")
+text = "salir
+"
+
+[node name="master label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0in2o")
+text = "Maestro"
+
+[node name="Master" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_sxwts")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="musica label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0in2o")
+text = "Musica"
+
+[node name="Musica" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_sxwts")]
+layout_mode = 2
+bus_name = "Musica"
+
+[node name="efectosdesonido label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0in2o")
+text = "Efectos de sonido"
+
+[node name="Efectos de sonido" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_sxwts")]
+layout_mode = 2
+bus_name = "Efectos de sonido"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]

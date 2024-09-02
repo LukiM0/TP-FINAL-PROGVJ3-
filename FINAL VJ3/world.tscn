@@ -1,0 +1,110 @@
+[gd_scene load_steps=20 format=3 uid="uid://chsoti4s302yg"]
+
+[ext_resource type="Texture2D" uid="uid://cbvofejeasat8" path="res://Textures/Map/grassproto.png" id="1_b1ldy"]
+[ext_resource type="PackedScene" uid="uid://nw1dolb5lrk0" path="res://Player/player.tscn" id="2_371l3"]
+[ext_resource type="PackedScene" uid="uid://bcqamma83cy48" path="res://Enemies/topo.tscn" id="3_afgip"]
+[ext_resource type="PackedScene" uid="uid://cr106s3jfp2ld" path="res://Utility/enemy_spawner.tscn" id="3_jfr7i"]
+[ext_resource type="Script" path="res://Utility/spawn_info.gd" id="5_2qiiv"]
+[ext_resource type="PackedScene" uid="uid://vx0s3manslnq" path="res://Enemies/topo_strong.tscn" id="6_kykhf"]
+[ext_resource type="PackedScene" uid="uid://b73u8ap4d65x4" path="res://Maps/cave1.tscn" id="6_q6as5"]
+[ext_resource type="PackedScene" uid="uid://d15uuxbydhewd" path="res://Enemies/cave_lizard.tscn" id="7_q2bqg"]
+[ext_resource type="PackedScene" uid="uid://cqst531gy374w" path="res://Enemies/crabulon.tscn" id="8_gogdb"]
+[ext_resource type="AudioStream" uid="uid://d378qpa72awx6" path="res://Audio/SoundEffect/Utilities/backMusic.mp3" id="10_wkth0"]
+
+[sub_resource type="Resource" id="Resource_co8fu"]
+script = ExtResource("5_2qiiv")
+time_start = 0
+time_end = 30
+enemy = ExtResource("3_afgip")
+enemy_num = 1
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_tx3qk"]
+script = ExtResource("5_2qiiv")
+time_start = 30
+time_end = 210
+enemy = ExtResource("3_afgip")
+enemy_num = 2
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_df6gk"]
+script = ExtResource("5_2qiiv")
+time_start = 60
+time_end = 180
+enemy = ExtResource("6_kykhf")
+enemy_num = 1
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_4e40u"]
+script = ExtResource("5_2qiiv")
+time_start = 180
+time_end = 210
+enemy = ExtResource("7_q2bqg")
+enemy_num = 1
+enemy_spawn_delay = 2
+
+[sub_resource type="Resource" id="Resource_r8ih4"]
+script = ExtResource("5_2qiiv")
+time_start = 210
+time_end = 240
+enemy = ExtResource("6_kykhf")
+enemy_num = 2
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_nj6qa"]
+script = ExtResource("5_2qiiv")
+time_start = 240
+time_end = 270
+enemy = ExtResource("7_q2bqg")
+enemy_num = 1
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_sx45o"]
+script = ExtResource("5_2qiiv")
+time_start = 180
+time_end = 180
+enemy = ExtResource("8_gogdb")
+enemy_num = 1
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_rpiwm"]
+script = ExtResource("5_2qiiv")
+time_start = 270
+time_end = 300
+enemy = ExtResource("6_kykhf")
+enemy_num = 4
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_lckwq"]
+script = ExtResource("5_2qiiv")
+time_start = 240
+time_end = 245
+enemy = ExtResource("8_gogdb")
+enemy_num = 1
+enemy_spawn_delay = 0
+
+[node name="World" type="Node2D"]
+
+[node name="Fondo" type="Sprite2D" parent="."]
+visible = false
+texture_repeat = 2
+position = Vector2(609, 307)
+texture = ExtResource("1_b1ldy")
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 1000)
+
+[node name="Player" parent="." instance=ExtResource("2_371l3")]
+position = Vector2(320, 228)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_jfr7i")]
+spawns = Array[ExtResource("5_2qiiv")]([SubResource("Resource_co8fu"), SubResource("Resource_tx3qk"), SubResource("Resource_df6gk"), SubResource("Resource_4e40u"), SubResource("Resource_r8ih4"), SubResource("Resource_nj6qa"), SubResource("Resource_sx45o"), SubResource("Resource_rpiwm"), SubResource("Resource_lckwq")])
+
+[node name="TileMap" parent="." instance=ExtResource("6_q6as5")]
+layer_0/z_index = -1
+
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="backgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_wkth0")
+autoplay = true
+bus = &"Musica"

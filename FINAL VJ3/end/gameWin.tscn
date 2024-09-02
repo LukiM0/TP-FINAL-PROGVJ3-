@@ -1,0 +1,112 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtbyv34f514k1"]
+
+[ext_resource type="Script" path="res://end/goToMenu.gd" id="1_xdt4v"]
+[ext_resource type="Texture2D" uid="uid://8ievfv5t33co" path="res://end/gameWin-Sheet.png" id="2_eeksq"]
+[ext_resource type="FontFile" uid="uid://dbhnr751vc1e1" path="res://Textures/Objects/Daydream.ttf" id="3_k4m0u"]
+[ext_resource type="PackedScene" uid="uid://rtju1vsyhrtf" path="res://Utility/basic_button.tscn" id="4_awt56"]
+
+[sub_resource type="Animation" id="Animation_626us"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_wfcxp"]
+resource_name = "win"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t4urj"]
+_data = {
+"RESET": SubResource("Animation_626us"),
+"win": SubResource("Animation_wfcxp")
+}
+
+[node name="gameWin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xdt4v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(959.333, 537.5)
+scale = Vector2(1.49583, 1.49583)
+texture = ExtResource("2_eeksq")
+hframes = 4
+vframes = 3
+
+[node name="DeathPanel" type="Panel" parent="."]
+process_mode = 2
+visible = false
+layout_mode = 0
+offset_left = 1376.0
+offset_top = 21.0
+offset_right = 1896.0
+offset_bottom = 236.0
+
+[node name="snd_lose" type="AudioStreamPlayer" parent="DeathPanel"]
+unique_name_in_owner = true
+
+[node name="snd_victory" type="AudioStreamPlayer" parent="DeathPanel"]
+unique_name_in_owner = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t4urj")
+}
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1373.0
+offset_top = 19.0
+offset_right = 1894.0
+offset_bottom = 230.0
+
+[node name="lbl_Result" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 523.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("3_k4m0u")
+text = "Lograste escapar!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btn_menu" parent="Panel" instance=ExtResource("4_awt56")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.365
+anchor_top = 0.674
+anchor_right = 0.669
+anchor_bottom = 0.837
+offset_left = 2.83499
+offset_top = 4.786
+offset_right = 2.755
+offset_bottom = 5.39299
+text = "Menu"
+
+[connection signal="pressed" from="Panel/btn_menu" to="." method="_on_btn_menu_pressed"]

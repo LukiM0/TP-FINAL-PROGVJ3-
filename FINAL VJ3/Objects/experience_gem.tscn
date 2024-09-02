@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb3v5qtava5ea"]
+
+[ext_resource type="Texture2D" uid="uid://dh02sve4rwjri" path="res://Textures/Objects/Experience_pink.png" id="1_bsn2o"]
+[ext_resource type="Script" path="res://Objects/experience_gem.gd" id="1_hhdys"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igi5b"]
+size = Vector2(50, 50)
+
+[node name="Experience_gem" type="Area2D" groups=["loot"]]
+scale = Vector2(1.5, 1.5)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_hhdys")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bsn2o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_igi5b")
+
+[node name="snd_collected" type="AudioStreamPlayer" parent="."]
+
+[connection signal="finished" from="snd_collected" to="." method="_on_snd_collected_finished"]

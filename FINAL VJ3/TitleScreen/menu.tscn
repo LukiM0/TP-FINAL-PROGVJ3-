@@ -1,0 +1,164 @@
+[gd_scene load_steps=11 format=3 uid="uid://bynrhq1mjuwpd"]
+
+[ext_resource type="Script" path="res://TitleScreen/menu.gd" id="1_moq3m"]
+[ext_resource type="PackedScene" uid="uid://rtju1vsyhrtf" path="res://Utility/basic_button.tscn" id="3_qekiq"]
+[ext_resource type="FontFile" uid="uid://e5icu6ihfgb1" path="res://Textures/Objects/Polyamine.ttf" id="3_y57vy"]
+[ext_resource type="Texture2D" uid="uid://1dqqptppimvu" path="res://Textures/Objects/MENU-Sheet.png" id="4_85joe"]
+[ext_resource type="Texture2D" uid="uid://c0p4361uat84y" path="res://Textures/Objects/menu2-Sheet.png" id="4_qksu4"]
+[ext_resource type="AudioStream" uid="uid://yivph3skbs01" path="res://Audio/SoundEffect/Utilities/menumusic.mp3" id="6_p4j70"]
+
+[sub_resource type="Animation" id="Animation_2dhla"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Encendido:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainMenu:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fbqs1"]
+resource_name = "main_menu"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainMenu:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_i5cs2"]
+resource_name = "start_up"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Encendido:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_55mqd"]
+_data = {
+"RESET": SubResource("Animation_2dhla"),
+"main_menu": SubResource("Animation_fbqs1"),
+"start_up": SubResource("Animation_i5cs2")
+}
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_moq3m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 2012.0
+offset_bottom = 1126.0
+color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Sprite2D" parent="."]
+position = Vector2(960.5, 542)
+scale = Vector2(1.49922, 1.49722)
+texture = ExtResource("4_85joe")
+hframes = 4
+vframes = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1437.0
+offset_top = 719.0
+offset_right = 1926.0
+offset_bottom = 999.0
+theme_override_fonts/font = ExtResource("3_y57vy")
+theme_override_font_sizes/font_size = 40
+text = "La ultima 
+superviviente"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 1530.0
+offset_top = -44.0
+offset_right = 1978.0
+offset_bottom = 245.0
+theme_override_fonts/font = ExtResource("3_y57vy")
+theme_override_font_sizes/font_size = 33
+text = "Un juego de:
+Lucas morin
+lucat games"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btn_play" parent="." instance=ExtResource("3_qekiq")]
+layout_mode = 0
+offset_left = 1537.0
+offset_top = 908.0
+offset_right = 1857.0
+offset_bottom = 978.0
+theme_override_fonts/font = ExtResource("3_y57vy")
+text = "Jugar"
+script = null
+
+[node name="btn_exit" parent="." instance=ExtResource("3_qekiq")]
+layout_mode = 0
+offset_left = 1537.0
+offset_top = 982.0
+offset_right = 1857.0
+offset_bottom = 1052.0
+theme_override_fonts/font = ExtResource("3_y57vy")
+text = "Salir
+"
+script = null
+
+[node name="Encendido" type="Sprite2D" parent="."]
+position = Vector2(963, 539.5)
+scale = Vector2(1.50156, 1.50694)
+texture = ExtResource("4_qksu4")
+hframes = 3
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_55mqd")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_p4j70")
+autoplay = true
+
+[connection signal="pressed" from="btn_play" to="." method="_on_btn_play_pressed"]
+[connection signal="pressed" from="btn_exit" to="." method="_on_btn_exit_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

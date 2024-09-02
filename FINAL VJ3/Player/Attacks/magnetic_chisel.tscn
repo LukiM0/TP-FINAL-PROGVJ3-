@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccan771aj0rov"]
+
+[ext_resource type="Script" path="res://Player/Attacks/magnetic_chisel.gd" id="1_fma22"]
+[ext_resource type="Texture2D" uid="uid://cb2waf3ls6tm2" path="res://Textures/Weapons/MagneticChisel.png" id="1_u3axl"]
+[ext_resource type="AudioStream" uid="uid://bo4biv0f5xyhg" path="res://Audio/SoundEffect/Attacks/magneticChisel.wav" id="3_syn6v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_biafy"]
+size = Vector2(44.5477, 10.6066)
+
+[node name="MagneticChisel" type="Area2D" groups=["attack"]]
+top_level = true
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_fma22")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u3axl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_biafy")
+disabled = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="ChangeDirection" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+
+[node name="ResetPosTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+autostart = true
+
+[node name="snd_attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_syn6v")
+volume_db = -10.0
+pitch_scale = 0.3
+bus = &"Efectos de sonido"
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ChangeDirection" to="." method="_on_change_direction_timeout"]
+[connection signal="timeout" from="ResetPosTimer" to="." method="_on_reset_pos_timer_timeout"]
